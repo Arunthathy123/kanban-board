@@ -17,14 +17,47 @@ const Board = () => {
     const openPopup =()=> setIsPopupOpen(true);
     const closePopup = ()=> setIsPopupOpen(false);
 
+    // ---------------------Add task logic-------------------------------------
+    const addTask =(title, description)=>{
+        const newTask = {
+            id: Date.now(),
+            title,
+            description
+        };
+        const updatedColumns ={
+            ...columns, 
+            'To Do': [...columns['To Do'], newTask]
+        };
+        setColumns(updatedColumns);
+        console.log('Updated Columns:', updatedColumns);
+    }
+
+    // ----------------------------Edit task logic----------------------------------
+    const deleteTask = (id, column ) =>{
+        const updateTasks =  columns[column].filter(task => task.id !== id);
+        setColumns({...columns, [column]: updateTasks})
+    }
+
+    // ----------------------------Update logic-----------------------------------
+    const editTask = (id, column, updatedTitle, updatedDescription)=>{
+        const updatedTasks = columns[column].map(task => task.id === id ? 
+            {...task, title: updatedTitle, description: updatedDescription } : task
+        );
+        setColumns({...columns, [column]:updatedTasks})
+    }
+
+
     return (
-        <div className='board'>
+        <div>
             <button className='add-task-btn' onClick={openPopup}>+ Add Task</button>
-            {Object.keys(columns).map(column => (
-                <Column key={column} name={column} task={columns[column]} moveTask='' />
-            ))}
-            {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask='' />}
+            <div className='board'>
+                {Object.keys(columns).map(column => (
+                    <Column key={column} name={column} task={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={editTask} />
+                ))}
+                {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask}/>}
+            </div>
         </div>
+        
     )
 }
 
