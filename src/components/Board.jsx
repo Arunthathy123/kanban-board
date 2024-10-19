@@ -1,11 +1,13 @@
 import React from 'react'
 import '../assets/boardStyle.css'
+import Column from './Column'
+
 const Board = () => {
   return (
     <div className='board'>
-      <div className='column'></div>
-      <div className='column'></div>
-      <div className='column'></div>
+      <Column />
+      <Column />
+      <Column />
     </div>
   )
 }

@@ -11,3 +11,25 @@
     background-color: #b0b0ff;
     border-radius: 5px;
 }
+
+@media (max-width: 768px) {
+    .board {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .board {
+        padding: 10px;
+    }
+
+    .column {
+        padding: 5px;
+    }
+}
