@@ -12,7 +12,7 @@ const Column = ({ name, tasks = [], moveTask,  deleteTask, editTask }) => {
       <div className="column" ref={drop}>
         <h2>{name}</h2>
         {tasks.map(task => (
-            <Task key={task.id} task={task} column={name} deleteTask={deleteTask} editTask={editTask} />
+            <Task key={task.id} task={task} column={name} deleteTask={deleteTask} editTask={() => editTask(task)} />
         ))}
 
       </div>

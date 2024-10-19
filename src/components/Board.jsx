@@ -13,48 +13,65 @@ const initialColumns = {
 const Board = () => {
     const [columns, setColumns] = useLocalStorage('kanbanColumns', initialColumns);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [currentTask, setCurrentTask] = useState(null);
 
-    const openPopup =()=> setIsPopupOpen(true);
-    const closePopup = ()=> setIsPopupOpen(false);
+    const openPopup = (task = null) => {
+        setCurrentTask(task);
+        setIsPopupOpen(true);
+    };
+      
+    const closePopup = ()=> {
+        setCurrentTask(null);
+        setIsPopupOpen(false);
+    }
 
     // ---------------------Add task logic-------------------------------------
-    const addTask =(title, description)=>{
+    const addTask = (title, description, column = 'To Do') => {
         const newTask = {
-            id: Date.now(),
-            title,
-            description
+          id: Date.now(),
+          title,
+          description,
+          column, 
         };
-        const updatedColumns ={
-            ...columns, 
-            'To Do': [...columns['To Do'], newTask]
+        const updatedColumns = {
+          ...columns,
+          'To Do': [...columns['To Do'], newTask],
         };
         setColumns(updatedColumns);
-        console.log('Updated Columns:', updatedColumns);
-    }
+    };
 
     // ----------------------------Edit task logic----------------------------------
     const deleteTask = (id, column ) =>{
-        const updateTasks =  columns[column].filter(task => task.id !== id);
-        setColumns({...columns, [column]: updateTasks})
+        console.log("Deleting task with ID:", id, "from column:", column);
+        if (columns[column]) {
+            const updatedTasks = columns[column].filter(task => task.id !== id);
+            setColumns({ ...columns, [column]: updatedTasks });
+        } else {
+        console.error(`Column "${column}" does not exist in columns.`);
+        }
     }
 
     // ----------------------------Update logic-----------------------------------
-    const editTask = (id, column, updatedTitle, updatedDescription)=>{
-        const updatedTasks = columns[column].map(task => task.id === id ? 
-            {...task, title: updatedTitle, description: updatedDescription } : task
+    const editTask = (id, column, updatedTitle, updatedDescription) => {
+        const updatedTasks = columns[column]?.map(task =>
+          task.id === id ? { ...task, title: updatedTitle, description: updatedDescription } : task
         );
-        setColumns({...columns, [column]:updatedTasks})
-    }
-
+      
+        if (updatedTasks) {
+          setColumns({ ...columns, [column]: updatedTasks });
+        } else {
+          console.error(`Column "${column}" does not exist.`);
+        }
+    };
 
     return (
         <div>
-            <button className='add-task-btn' onClick={openPopup}>+ Add Task</button>
+            <button className='add-task-btn' onClick={() => openPopup()}>+ Add Task</button>
             <div className='board'>
                 {Object.keys(columns).map(column => (
-                    <Column key={column} name={column} tasks={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={editTask} />
+                    <Column key={column} name={column} tasks={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={openPopup} />
                 ))}
-                {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask}/>}
+                {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask} currentTask={currentTask} editTask={editTask}/>}
             </div>
         </div>
         

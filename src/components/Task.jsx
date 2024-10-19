@@ -13,8 +13,8 @@ const Task = ({ task, column, deleteTask, editTask }) => {
   return (
     <div className="task" ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }}>
         <div className="task-actions">
-            <button onClick={() => editTask(task.id)}>✏️</button>
-            <button onClick={() => deleteTask(task.id)}>🗑️</button>
+            <button onClick={() => editTask(task.id, column)}>✏️</button>
+            <button onClick={() => deleteTask(task.id, column)}>🗑️</button>
         </div>
         <div className="task-content">
             <h3>{task.title}</h3>
