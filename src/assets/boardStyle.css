@@ -11,6 +11,18 @@
     background-color: #b0b0ff;
     border-radius: 5px;
 }
+.task {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+.task:hover {
+    transform: scale(1.05);
+}
 
 @media (max-width: 768px) {
     .board {
@@ -22,6 +34,10 @@
         width: 100%;
         margin-bottom: 20px;
     }
+    .task {
+        padding: 8px;
+        margin: 8px 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -31,5 +47,10 @@
 
     .column {
         padding: 5px;
+    }
+    .task {
+        padding: 5px;
+        margin: 5px 0;
+        font-size: 0.9rem;
     }
 }
