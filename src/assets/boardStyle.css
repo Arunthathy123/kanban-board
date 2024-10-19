@@ -1,0 +1,13 @@
+
+.board {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.column {
+    width: 30%;
+    padding: 10px;
+    background-color: #b0b0ff;
+    border-radius: 5px;
+}
