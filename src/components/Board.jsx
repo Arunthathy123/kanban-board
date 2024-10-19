@@ -52,7 +52,7 @@ const Board = () => {
             <button className='add-task-btn' onClick={openPopup}>+ Add Task</button>
             <div className='board'>
                 {Object.keys(columns).map(column => (
-                    <Column key={column} name={column} task={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={editTask} />
+                    <Column key={column} name={column} tasks={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={editTask} />
                 ))}
                 {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask}/>}
             </div>
