@@ -30,10 +30,17 @@ const AddTaskPopup = ({ closePopup, addTask, currentTask, editTask}) => {
             <div className="popup-inner">
                 <h2>{currentTask ? 'Edit Task' : 'Add Task'}</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type='text' placeholder="Task Title" value={title} onChange={(e)=>setTitle(e.target.value)} required />
-                    <textarea type='text' placeholder="Task Description" value={description} onChange={(e)=>setDescription(e.target.value)} required></textarea>
-                    <button type="submit">{currentTask ? 'Update Task' : 'Add Task'}</button>
-                    <button type="button" onClick={closePopup}>Cancel</button>
+                    <br />
+                    <div>
+                        <input type='text' placeholder="Task Title" value={title} onChange={(e)=>setTitle(e.target.value)} required autoComplete='off' />
+                        <textarea type='text' placeholder="Task Description" value={description} onChange={(e)=>setDescription(e.target.value)} required autoComplete='off'></textarea>
+                    </div>
+                    <br />
+                    <div>
+                        <button className='popup-btn' type="submit">{currentTask ? 'Update Task' : 'Add Task'}</button>
+                        <button className='popup-btn' type="button" onClick={closePopup}>Cancel</button>
+                    </div>
+                    
                 </form>
             </div>
         </div>

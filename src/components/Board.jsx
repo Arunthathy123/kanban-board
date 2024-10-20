@@ -77,7 +77,7 @@ const Board = () => {
     }
     return (
         <div>
-            <button className='add-task-btn' onClick={() => openPopup()}>+ Add Task</button>
+            <button className='add-task-btn' onClick={() => openPopup()}><b style={{fontSize:'1.2rem'}}>+ </b>Add New Task</button>
             <div className='board'>
                 {Object.keys(columns).map(column => (
                     <Column key={column} name={column} tasks={columns[column]} moveTask={moveTask} deleteTask={deleteTask}  editTask={openPopup} />
