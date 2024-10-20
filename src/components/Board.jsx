@@ -4,6 +4,7 @@ import Column from './Column'
 import {useLocalStorage} from '../hooks/useLocalStorage'
 import AddTaskPopup from './AddTaskPopup';
 
+
 const initialColumns = {
     'To Do': [],
     'In Progress': [],
@@ -14,6 +15,7 @@ const Board = () => {
     const [columns, setColumns] = useLocalStorage('kanbanColumns', initialColumns);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const openPopup = (task = null) => {
         setCurrentTask(task);
@@ -75,12 +77,22 @@ const Board = () => {
             [toColumn]: [...columns[toColumn],task]
         })
     }
+
+    // ------------------- filtering --------------------------------------------
+    const filteredTasks = (tasks) => {
+        return tasks.filter(task => task.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      };
+
+      
     return (
         <div>
-            <button className='add-task-btn' onClick={() => openPopup()}><b style={{fontSize:'1.2rem'}}>+ </b>Add New Task</button>
+            <div className='head-in-board'>
+                <button className='add-task-btn' onClick={() => openPopup()}><b style={{fontSize:'1.2rem'}}>+ </b>Add New Task</button>
+                <input type="text" placeholder="Search tasks by title" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="search-bar"/>
+            </div>
             <div className='board'>
                 {Object.keys(columns).map(column => (
-                    <Column key={column} name={column} tasks={columns[column]} moveTask={moveTask} deleteTask={deleteTask}  editTask={openPopup} />
+                    <Column key={column} name={column} tasks={filteredTasks(columns[column])} moveTask={moveTask} deleteTask={deleteTask}  editTask={openPopup} />
                 ))}
                 {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask} currentTask={currentTask} editTask={editTask}/>}
             </div>

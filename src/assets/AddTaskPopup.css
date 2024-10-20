@@ -50,7 +50,6 @@ input:focus, textarea:focus {
 .add-task-btn{
   padding: 13px 20px;
   margin-top: 2%;
-  margin-left: 5%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .popup-btn{
