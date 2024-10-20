@@ -64,12 +64,21 @@ const Board = () => {
         }
     };
 
+    // ------------------- move task ------------------------------------
+    const moveTask = (taskId, fromColumn, toColumn)=>{
+        const task= columns[fromColumn].find(task => task.id === taskId);
+        setColumns({
+            ...columns,
+            [fromColumn]:columns[fromColumn].filter(task => task.id !== taskId),
+            [toColumn]: [...columns[toColumn],task]
+        })
+    }
     return (
         <div>
             <button className='add-task-btn' onClick={() => openPopup()}>+ Add Task</button>
             <div className='board'>
                 {Object.keys(columns).map(column => (
-                    <Column key={column} name={column} tasks={columns[column]} moveTask='' deleteTask={deleteTask}  editTask={openPopup} />
+                    <Column key={column} name={column} tasks={columns[column]} moveTask={moveTask} deleteTask={deleteTask}  editTask={openPopup} />
                 ))}
                 {isPopupOpen && <AddTaskPopup closePopup={closePopup} addTask={addTask} currentTask={currentTask} editTask={editTask}/>}
             </div>
