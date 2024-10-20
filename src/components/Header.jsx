@@ -1,12 +1,22 @@
-import React from 'react'
-import '../assets/headerStyle.css'
-const Header = () => {
-  return (
-    <header className='header'>
-        <h1>Kanban Board</h1>
-        <button></button>
-    </header>
-  )
-}
+import React, { useState } from 'react';
+import '../assets/headerStyle.css';
 
-export default Header
+const Header = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleTheme = () => {
+        setIsDarkMode(!isDarkMode);
+        document.body.classList.toggle('dark-mode', !isDarkMode);
+    };
+
+    return (
+        <header className='header'>
+            <h1 className='heading'>Kanban Board</h1>
+            <button className='theamBtn' onClick={toggleTheme}>
+                {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+            </button>
+        </header>
+    );
+};
+
+export default Header;

@@ -37,7 +37,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-  border-color: #007bff;
+  border-color: #232528;
   outline: none;
 }
 .no-tasks-message {
