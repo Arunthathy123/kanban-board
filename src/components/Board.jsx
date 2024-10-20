@@ -41,7 +41,7 @@ const Board = () => {
         setColumns(updatedColumns);
     };
 
-    // ----------------------------Edit task logic----------------------------------
+    // ----------------------------delete task logic----------------------------------
     const deleteTask = (id, column ) =>{
         console.log("Deleting task with ID:", id, "from column:", column);
         if (columns[column]) {
@@ -52,7 +52,7 @@ const Board = () => {
         }
     }
 
-    // ----------------------------Update logic-----------------------------------
+    // ----------------------------edit logic-----------------------------------
     const editTask = (id, column, updatedTitle, updatedDescription) => {
         const updatedTasks = columns[column]?.map(task =>
           task.id === id ? { ...task, title: updatedTitle, description: updatedDescription } : task
