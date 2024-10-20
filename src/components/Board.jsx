@@ -32,6 +32,7 @@ const Board = () => {
           title,
           description,
           column, 
+          date: new Date().toLocaleDateString(),
         };
         const updatedColumns = {
           ...columns,
@@ -56,13 +57,14 @@ const Board = () => {
         const updatedTasks = columns[column]?.map(task =>
           task.id === id ? { ...task, title: updatedTitle, description: updatedDescription } : task
         );
-      
+   
         if (updatedTasks) {
           setColumns({ ...columns, [column]: updatedTasks });
         } else {
           console.error(`Column "${column}" does not exist.`);
         }
-    };
+   };
+   
 
     // ------------------- move task ------------------------------------
     const moveTask = (taskId, fromColumn, toColumn)=>{

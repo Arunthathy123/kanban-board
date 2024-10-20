@@ -18,7 +18,7 @@ const AddTaskPopup = ({ closePopup, addTask, currentTask, editTask}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (currentTask) {
-          editTask(currentTask.id, currentTask.column, title, description); 
+            editTask(currentTask.id, currentTask.column, title, description); 
         } else {
           addTask(title, description, 'To Do'); 
         }
@@ -28,7 +28,7 @@ const AddTaskPopup = ({ closePopup, addTask, currentTask, editTask}) => {
     return (
         <div className="popup">
             <div className="popup-inner">
-                <h2>Add Task</h2>
+                <h2>{currentTask ? 'Edit Task' : 'Add Task'}</h2>
                 <form onSubmit={handleSubmit}>
                     <input type='text' placeholder="Task Title" value={title} onChange={(e)=>setTitle(e.target.value)} required />
                     <textarea type='text' placeholder="Task Description" value={description} onChange={(e)=>setDescription(e.target.value)} required></textarea>
