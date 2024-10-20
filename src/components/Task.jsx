@@ -27,11 +27,10 @@ const Task = ({ task, column, deleteTask, editTask }) => {
               <button className="task-actions-btn" onClick={() => deleteTask(task.id, column)}><FontAwesomeIcon style={{color:'red', fontSize:'1rem'}} icon={faTrashAlt} /></button>
             </div>
           </div>
-          <div className='taskHead' style={{gap:'3rem'}}>
+          <div className='taskHead' style={{gap:'3rem', marginTop:'-15px'}}>
             <p className='taskDescription'>{task.description}</p>
             <p className='taskDate'><strong>Created on:</strong> {task.date}</p>
-          </div>
-            
+          </div> 
         </div>
     </div>
   );
